@@ -16,3 +16,11 @@ use Illuminate\Http\Request;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+Route::prefix('funcionarios')->group(function(){
+    Route::get('/list', 'FuncionariosController@index');
+    Route::get('/show/{id}', 'FuncionariosController@show');
+    Route::post('/create', 'FuncionariosController@store'); /* ->name('criar-funcionario') */
+    Route::post('/update/{id}', 'FuncionariosController@update');
+    Route::post('/destroy/{id}', 'FuncionariosController@destroy');
+});
