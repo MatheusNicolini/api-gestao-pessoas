@@ -20,7 +20,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 Route::prefix('funcionarios')->group(function(){
     Route::get('/list', 'FuncionariosController@index');
     Route::get('/show/{id}', 'FuncionariosController@show');
-    Route::post('/create', 'FuncionariosController@store'); /* ->name('criar-funcionario') */
+    Route::post('/create', 'FuncionariosController@store');
     Route::post('/update/{id}', 'FuncionariosController@update');
     Route::post('/destroy/{id}', 'FuncionariosController@destroy');
 });
