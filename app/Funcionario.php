@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Carbon\Carbon;
 
 class Funcionario extends Model
 {
@@ -15,6 +16,12 @@ class Funcionario extends Model
     protected $guarded = [
         'id', 'created_at', 'update_at'
     ];
+
+    public function getDataNascimentoAttribute($valorData) {
+        $data = Carbon::createFromFormat('Y-m-d', $valorData);
+
+        return $data->format('d/m/Y');
+    }
 
     protected $table = 'funcionarios';
 }

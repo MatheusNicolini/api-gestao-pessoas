@@ -30,10 +30,14 @@ class FuncionariosController extends Controller
 
     // Cadastrar funcionários
     public function store(Request $request) {
+        $data = $request->data_nascimento;
+		$data = str_replace('/','-', $data);
+        $dataFormatada = date('Y-m-d', strtotime($data));
+        
         // Cria um objeto Funcionário
         $funcionario = new Funcionario();
         $funcionario->nome            = $request->nome;
-        $funcionario->data_nascimento = $request->data_nascimento;
+        $funcionario->data_nascimento = $dataFormatada;
         $funcionario->sexo            = $request->sexo;
         $funcionario->telefone        = $request->telefone;
         $funcionario->endereco        = $request->endereco;
@@ -52,6 +56,10 @@ class FuncionariosController extends Controller
 
     // Atualiza funcionário específico
     public function update(Request $request, $id) {
+        $data = $request->data_nascimento;
+		$data = str_replace('/','-', $data);
+        $dataFormatada = date('Y-m-d', strtotime($data));
+        
         // Pega o id do funcionário e se caso não existir retorna null
         $funcionario = Funcionario::find($id);
 
@@ -61,7 +69,7 @@ class FuncionariosController extends Controller
         }
         else {
             if($request->nome) { $funcionario->nome = $request->nome; }
-            if($request->data_nascimento) { $funcionario->data_nascimento = $request->data_nascimento; }
+            if($request->data_nascimento) { $funcionario->data_nascimento = $dataFormatada; }
             if($request->sexo) { $funcionario->sexo = $request->sexo; }
             if($request->telefone) { $funcionario->telefone = $request->telefone; }
             if($request->endereco) { $funcionario->endereco = $request->endereco; }
