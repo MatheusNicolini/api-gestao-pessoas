@@ -2,15 +2,15 @@
 
 API que tem como finalidade mostrar meus conhecimentos em PHP e na sua framework Laravel.
 
-Clonar projeto do repositório GitHub
+## Clonar projeto do repositório GitHub
+
+Clonar com https: 
 
 `git clone https://github.com/MatheusNicolini/api-gestao-pessoas.git`
 
-## Instalar depêndencias do laravel
+Clonar com SSH:
 
-Entrar na pasta do projeto(api-gestao-pessoas) e rodar:
-
-`composer install`
+`git@github.com:MatheusNicolini/api-gestao-pessoas.git`
 
 ## Instalar depêndencias do laravel
 
