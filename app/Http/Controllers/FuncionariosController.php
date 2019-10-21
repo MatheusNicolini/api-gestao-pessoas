@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 use App\Funcionario;
 
 class FuncionariosController extends Controller
-{
+{   
     // Método listar funcionários
     public function index() {
         return response()->json([ 'funcionarios' => Funcionario::all() ]);
@@ -33,14 +33,21 @@ class FuncionariosController extends Controller
         // Cria um objeto Funcionário
         $funcionario = new Funcionario();
         $funcionario->nome            = $request->nome;
-        $funcionario->data_nascimento = date('Y-d-m', strtotime($request->data_nascimento));
+        $funcionario->data_nascimento = $request->data_nascimento;
         $funcionario->sexo            = $request->sexo;
         $funcionario->telefone        = $request->telefone;
         $funcionario->endereco        = $request->endereco;
-        $funcionario->save();
+
+        if($funcionario->nome != "" && $funcionario->data_nascimento != "" && $funcionario->sexo != "" && $funcionario->telefone != "" && $funcionario->telefone != "" && $funcionario->endereco != "") {
+            $funcionario->save();
         
-        // Retorna um json com os dados cadastrados
-        return response()->json($funcionario, 201);
+            // Retorna um json com os dados cadastrados
+            return response()->json($funcionario, 201);
+        }
+        else {
+            $error = ['error' => [ 'message' => 'Os campos não foram todos preenchidos', 'code' => '404' ]];
+            return response()->json($error);
+        }
     }
 
     // Atualiza funcionário específico
@@ -54,7 +61,7 @@ class FuncionariosController extends Controller
         }
         else {
             if($request->nome) { $funcionario->nome = $request->nome; }
-            if($request->data_nascimento) { $funcionario->data_nascimento = date('Y-d-m', strtotime($request->data_nascimento)); }
+            if($request->data_nascimento) { $funcionario->data_nascimento = $request->data_nascimento; }
             if($request->sexo) { $funcionario->sexo = $request->sexo; }
             if($request->telefone) { $funcionario->telefone = $request->telefone; }
             if($request->endereco) { $funcionario->endereco = $request->endereco; }
